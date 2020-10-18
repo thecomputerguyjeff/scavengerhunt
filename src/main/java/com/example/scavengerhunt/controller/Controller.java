@@ -105,7 +105,7 @@ public class Controller {
                     "\n\n and the 'prize' at the end of the scavenger hunt is.... API Mastery! :)";
         }
         else {
-            return "That didn't quite work... key was" + singleKeyValue.getKey();
+            return "That didn't quite work... key was " + singleKeyValue.getKey();
         }
     }
 }
