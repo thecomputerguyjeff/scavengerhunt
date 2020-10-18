@@ -45,7 +45,7 @@ public class Controller {
         return "See what I did there... You've just learned about path variables! Aren't scavenger hunts fun! Honestly, I'm having way too much fun doing this...\n\n" +
                 "anyways... so right now, all I have been responding to your APIs are STRING responses. They are boring and not very useful. A MUCH better way to respond\n" +
                 "is with something call JSON. JSON is much more readable, and usable. Let's see what it looks like...\n" +
-                "Please add a header to your request (also called a request header). The key should be 'use' and the value should be 'json'. Good luck!";
+                "Please add a header to your request (also called a request header) - using the headers tab. The key should be 'use' and the value should be 'json'. Good luck!";
     }
 
     @GetMapping("/json")
@@ -60,7 +60,7 @@ public class Controller {
     }
 
     @GetMapping("/jsonRequest")
-    public Object jsonRequest(@RequestParam String done, @RequestParam String second) {
+    public Object jsonRequest(@RequestParam(required = false) String done, @RequestParam(required = false) String second) {
         if("yes".equalsIgnoreCase(done)) {
             return "You just used a query param! Just like JSON, and headers, query params are also key value pairs. You can also have multiple query param, like this:\n" +
                     "try making a request to /jsonRequest?done=yes&second=hello";
