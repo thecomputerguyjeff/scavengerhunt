@@ -62,10 +62,10 @@ public class Controller {
     @GetMapping("/jsonRequest")
     public Object jsonRequest(@RequestParam(required = false) String done, @RequestParam(required = false) String second) {
         if("yes".equalsIgnoreCase(done)) {
-            return "You just used a query param! Just like JSON, and headers, query params are also key value pairs. You can also have multiple query param, like this:\n" +
+            return "You just used a query param! Just like JSON, and headers, query params are also key value pairs. You can also have multiple query params, like this:\n" +
                     "try making a request to /jsonRequest?done=yes&second=hello";
         }
-        else if ("hello".equalsIgnoreCase(second)) {
+        if ("hello".equalsIgnoreCase(second)) {
             return "You did it! Great job! Extra / unknown query params will just be ignored, you can try putting a whole bunch in. When you are ready to move on, we are going to try something new!\n\n" +
                     "We are going to make a POST request. So far what we've seen with GET requests, you can input headers, path variables, and query params (as well as the actual url (or route) that you are calling.\n" +
                     "In response, you get response headers (which, truthfully we haven't really seen), and a response body.\n" +
