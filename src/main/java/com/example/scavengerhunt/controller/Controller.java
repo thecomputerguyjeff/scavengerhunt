@@ -38,7 +38,7 @@ public class Controller {
     }
 
     @GetMapping("/response")
-    public Object response(@RequestHeader String use) {
+    public Object response(@RequestHeader(required=false) String use) {
         if("json".equalsIgnoreCase(use)) {
             return SingleKeyValue.builder().key("This is a Json Object!").next("GET request to /json").build();
         }
