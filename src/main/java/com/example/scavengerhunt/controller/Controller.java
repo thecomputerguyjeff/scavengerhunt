@@ -61,10 +61,6 @@ public class Controller {
 
     @GetMapping("/jsonRequest")
     public Object jsonRequest(@RequestParam(required = false) String done, @RequestParam(required = false) String second) {
-        if("yes".equalsIgnoreCase(done)) {
-            return "You just used a query param! Just like JSON, and headers, query params are also key value pairs. You can also have multiple query params, like this:\n" +
-                    "try making a request to /jsonRequest?done=yes&second=hello";
-        }
         if ("hello".equalsIgnoreCase(second)) {
             return "You did it! Great job! Extra / unknown query params will just be ignored, you can try putting a whole bunch in. When you are ready to move on, we are going to try something new!\n\n" +
                     "We are going to make a POST request. So far what we've seen with GET requests, you can input headers, path variables, and query params (as well as the actual url (or route) that you are calling.\n" +
@@ -73,6 +69,10 @@ public class Controller {
                     "First click on GET, and change it to a POST. Set your route to /request. Find the body tab, and there are some radio buttons, you will want to select raw\n" +
                     "Then on the right, there is a dropdown where you will want to select JSON. Now you are ready to enter a body. to keep it simple. We will use a single key, key, and a value value.\n\n" +
                     "Don't forget to start with a { and end with a }. In between you will write \"key\": \"value\"\n\nLet's give it a shot!";
+        }
+        else if("yes".equalsIgnoreCase(done)) {
+            return "You just used a query param! Just like JSON, and headers, query params are also key value pairs. You can also have multiple query params, like this:\n" +
+                    "try making a request to /jsonRequest?done=yes&second=hello";
         }
         return BigJson.builder()
                 .arrayOfObject(Arrays.asList(SingleKeyValue.builder().key("value1").build(),
