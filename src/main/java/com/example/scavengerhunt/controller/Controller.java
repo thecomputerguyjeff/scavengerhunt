@@ -17,7 +17,7 @@ public class Controller {
 
     @GetMapping("/start")
     public String start() {
-        return "You are early...try again later";
+        return "Awesome! You've made it in! Welcome :) \nMake a GET request to /next to continue";
     }
 
     @GetMapping("/next")
