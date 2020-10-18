@@ -1,18 +1,19 @@
 package com.example.scavengerhunt.controller;
 
+import com.example.scavengerhunt.model.BigJson;
+import com.example.scavengerhunt.model.NestedObject;
+import com.example.scavengerhunt.model.NumberObject;
 import com.example.scavengerhunt.model.SingleKeyValue;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class Controller {
-
-//    @GetMapping("/start")
-//    public String start() {
-//        return "Awesome! You've made it in! Welcome :) \nMake a GET request to /next to continue";
-//    }
 
     @GetMapping("/start")
     public String start() {
@@ -56,5 +57,54 @@ public class Controller {
                 "values can be numbers (1 or 1.0), Strings, booleans (true/false). They can also be null, another object ( {} ) or an array ( []) " +
                 "The can be 2 lines, or 1000s of lines long. They always start with { and end with } because they are one giant object" +
                 "\nLet's see another example of a json object, make a GET request to /jsonRequest";
+    }
+
+    @GetMapping("/jsonRequest")
+    public Object jsonRequest(@RequestParam String done, @RequestParam String second) {
+        if("yes".equalsIgnoreCase(done)) {
+            return "You just used a query param! Just like JSON, and headers, query params are also key value pairs. You can also have multiple query param, like this:\n" +
+                    "try making a request to /jsonRequest?done=yes&second=hello";
+        }
+        else if ("hello".equalsIgnoreCase(second)) {
+            return "You did it! Great job! Extra / unknown query params will just be ignored, you can try putting a whole bunch in. When you are ready to move on, we are going to try something new!\n\n" +
+                    "We are going to make a POST request. So far what we've seen with GET requests, you can input headers, path variables, and query params (as well as the actual url (or route) that you are calling.\n" +
+                    "In response, you get response headers (which, truthfully we haven't really seen), and a response body.\n" +
+                    "With a POST request, all of that is true, but you ALSO get a Request Body you can send into the API call. Let's try it. \n" +
+                    "First click on GET, and change it to a POST. Set your route to /request. Find the body tab, and there are some radio buttons, you will want to select raw\n" +
+                    "Then on the right, there is a dropdown where you will want to select JSON. Now you are ready to enter a body. to keep it simple. We will use a single key, key, and a value value.\n\n" +
+                    "Don't forget to start with a { and end with a }. In between you will write \"key\": \"value\"\n\nLet's give it a shot!";
+        }
+        return BigJson.builder()
+                .arrayOfObject(Arrays.asList(SingleKeyValue.builder().key("value1").build(),
+                        SingleKeyValue.builder().key("value2").build()))
+                .arrayOfStrings(Arrays.asList("This", "Is", "An", "Array", "Of", "Strings"))
+                .nestedObject(NestedObject.builder()
+                        .nestedKeyValue(SingleKeyValue.builder().key("nested value").build())
+                        .build())
+                .nestedObjectArray(Collections.singletonList(NestedObject.builder()
+                        .nestedKeyValue(SingleKeyValue.builder().key("nested value").build())
+                        .build()))
+                .objectOfNumbers(NumberObject.builder().decimal(2.3).integer(4).build())
+                .description("Take a look around. One thing that is interesting, I have NO I(DEA what order" +
+                        "everything will be loaded in. JSON Objects, order does not matter(unless inside an array)\n" +
+                        "and so this could be the first thing, or the last thing, or something else in the object.\n" +
+                        "Once you are comfortable and feel like you understand what is going on, we're going to make" +
+                        "a GET request to /jsonRequest?done=yes")
+                .build();
+    }
+
+    @PostMapping("/request")
+    public String request(@RequestBody SingleKeyValue singleKeyValue) {
+        if ("value".equalsIgnoreCase(singleKeyValue.getKey())) {
+            return "Awesome! You did it!\n I hope you enjoyed this little activity, and hope you learned something from it.\n" +
+                    "The last thing to do is to open up github and see how this works. You will want to look in the model package \n" +
+                    "To see the POJO's (look up what that stands for if you don't know) that represent all the JSON objects\n" +
+                    "And look in the controller to see how all the endpoints are being used. Don't worry, I will be sure to explain it all next week in class!" +
+                    "\nDon't forget to fill out the little quiz in canvas when you are done!\n\n" +
+                    "github link: https://github.com/thecomputerguyjeff/scavengerhunt/tree/master/src/main/java/com/example/scavengerhunt";
+        }
+        else {
+            return "That didn't quite work... key was" + singleKeyValue.getKey();
+        }
     }
 }
