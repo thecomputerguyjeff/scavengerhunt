@@ -101,7 +101,8 @@ public class Controller {
                     "To see the POJO's (look up what that stands for if you don't know) that represent all the JSON objects\n" +
                     "And look in the controller to see how all the endpoints are being used. Don't worry, I will be sure to explain it all next week in class!" +
                     "\nDon't forget to fill out the little quiz in canvas when you are done!\n\n" +
-                    "github link: https://github.com/thecomputerguyjeff/scavengerhunt/tree/master/src/main/java/com/example/scavengerhunt";
+                    "github link: https://github.com/thecomputerguyjeff/scavengerhunt/tree/master/src/main/java/com/example/scavengerhunt" + "" +
+                    "\n\n and the 'prize' at the end of the scavenger hunt is.... API Mastery! :)";
         }
         else {
             return "That didn't quite work... key was" + singleKeyValue.getKey();
