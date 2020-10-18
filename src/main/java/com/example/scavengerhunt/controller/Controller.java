@@ -49,7 +49,7 @@ public class Controller {
     }
 
     @GetMapping("/json")
-    public String json(@RequestHeader String use) {
+    public String json(@RequestHeader(required=false) String use) {
         if ("json".equalsIgnoreCase(use)) {
             return "Hey, I didn't tell you to use a header...please remove it!";
         }
