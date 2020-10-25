@@ -25,8 +25,8 @@ public class Controller {
         return "Allright, getting serious. We're gonna learn some fun things about APIs today!. Make a GET request to /echo/fun to continue";
     }
 
-    @GetMapping("/echo/{echoField}")
-    public String echo (@PathVariable String echoField) {
+    @GetMapping("/echo/{field}")
+    public String echo (@PathVariable(value="field") String echoField) {
         if("done".equalsIgnoreCase(echoField)) {
             return "Awesome. That was fun fun fun (get it! Echo!). I can read in Path Variables from URLs and do whatever I want with them.\n" +
                     "Path variables are just one of many ways to send inputs into APIs. We'll continue to explore more" +
@@ -38,7 +38,7 @@ public class Controller {
     }
 
     @GetMapping("/response")
-    public Object response(@RequestHeader(required=false) String use) {
+    public Object response(@RequestHeader(value="use", required=false) String use) {
         if("json".equalsIgnoreCase(use)) {
             return SingleKeyValue.builder().key("This is a Json Object!").next("GET request to /json").build();
         }

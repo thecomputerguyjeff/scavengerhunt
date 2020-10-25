@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class SingleKeyValue {
     public String key;
     public String next;
+    public int test;
 }
